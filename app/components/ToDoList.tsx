@@ -4,10 +4,29 @@ const ToDoList = () => {
   return (
     <div>
       <h2>Your ToDo List</h2>
-      <ul>
-        <li>Task 1</li>
-        <li>Task 2</li>
-        <li>Task 3</li>
+      <ul className="space-y-3">
+        <li className="flex justify-between p-4 bg-white border-1-4 border-blue-500 rounded shadow">
+          <span>散歩</span>
+          <div>
+            <button className="text-green-500 mr-3">edit</button>
+            <button className="text-red-500 ">delete</button>
+          </div>
+        </li>
+                <li className="flex justify-between p-4 bg-white border-1-4 border-blue-500 rounded shadow">
+          <span>散歩</span>
+          <div>
+            <button className="text-green-500 mr-3">edit</button>
+            <button className="text-red-500 ">delete</button>
+          </div>
+        </li>
+        <li className="flex justify-between p-4 bg-white border-1-4 border-blue-500 rounded shadow">
+          <span>散歩</span>
+          <div>
+            <button className="text-green-500 mr-3">edit</button>
+            <button className="text-red-500 ">delete</button>
+          </div>
+        </li>
+
       </ul>
     </div>
   );
