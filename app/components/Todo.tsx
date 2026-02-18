@@ -3,6 +3,7 @@
 import { deleteTodo, editTodo } from '@/src/api';
 import { Task } from '@/src/types';
 import React, { useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface TodoProps {
     todo: Task;
@@ -10,6 +11,7 @@ interface TodoProps {
     
 const Todo = ({ todo }: TodoProps) => {
 const ref = useRef<HTMLInputElement>(null);
+const router = useRouter();
 
   const [isEditing, setIsEditing] = React.useState(false);
   const [editedTextTitle, setEditedTextTitle] = React.useState(todo.text);
@@ -22,7 +24,8 @@ const ref = useRef<HTMLInputElement>(null);
 
   const handleEdit = async () => {
     await editTodo(todo.id, editedTextTitle);
-    setIsEditing(true);
+    setIsEditing(false);
+    router.refresh();
   };
 
   const handleSave = () => {
@@ -31,6 +34,7 @@ const ref = useRef<HTMLInputElement>(null);
 
   const handleDelete = async () => {
     await deleteTodo(todo.id);
+    router.refresh();
   };
   return (
     <li 
@@ -42,9 +46,10 @@ const ref = useRef<HTMLInputElement>(null);
               ref={ref}
               type="text"
               className="mr-2 py-1 px-2 rounded border-gray-400 border"
-              value={editedTaskTitle
+              value={editedTextTitle}
+              
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEditedTextTitle(e.target.value)}
-              }
+              
             />
            ) : (
              <span>{todo.text}</span>

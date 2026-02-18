@@ -1,27 +1,29 @@
 "use client";
 
 import { addTodo } from "@/src/api";
+import { useRouter } from "next/navigation";
 import React, { ChangeEvent,FormEvent,useState  } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 function AddTask() {
 
     const [taskTitle, setTaskTitle] = useState("");
+    const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const todo = {
-            id: "3",
-            text: "New Task",
-        };
+     
         await addTodo({ id: uuidv4(), text: taskTitle });
 
         setTaskTitle("");
+
+        router.refresh();
     };
 
     return (
         <form className="mb-4 space-y-3" onSubmit={handleSubmit}>
             <input
+                value={taskTitle}
                 type="text"
                 className="w-full border px-4 py-2 rounded-lg focus:outline-none focus:border-blue-400"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setTaskTitle(e.target.value)} />
